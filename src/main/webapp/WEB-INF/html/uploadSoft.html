@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>上传软件</title>
+	<link rel="stylesheet" href="css/index0.css">
+	<link href="images/logo3.png" rel="shortcut icon" />
+	</head>
+<body>
+
+<div class="wrappe wrappe-upload">
+	<div class="top">
+		<div class="top0">
+			
+			<a href="">退出</a>
+			<a href="login.html">登录</a>
+		</div>
+		<div class="top1">
+			<div class="logo">
+				<img src="images/logo.png">
+			</div>
+			<div class="search">
+					<form action="">
+						<div class="button">
+						<input type="text" class="text"placeholder="搜索"/>
+						</div>
+						<a href="searchSoftListsearchSoftList.html" class="find">搜索</a>
+					</form>
+			</div>
+		</div>
+		
+	</div>
+	<div class="header">
+	<ul>
+		<li class="header-li1"><a href="">首页</a></li>
+		<li><a href="">装机必备</a></li>
+		<li><a href="">最新更新</a></li>
+		<li><a href="">下载排行</a></li>
+		<li><a href="">软件分类</a></li>
+		<li><a href="">发布软件</a></li>
+		<li><a href="">软件资讯</a></li>
+		<li><a href="">关于我们</a></li>
+		
+	</ul>
+	</div>
+	<div class="content content-upload">
+		<p>xx系统软件发布页面</p>
+		<form action="" method="post" name="con-upload" id="ocheck" onsubmit="return fs()">
+		<ul>
+		<li>
+			<div class="name">
+				软件名:<input type="text"  id="softname" name="softname"></div>
+			<div class="window">
+				操作系统:
+				<select>
+					<option value="volvo">Windows</option>
+					<option value="saab">Unix</option>
+					<option value="opel">Linux</option>
+					<option value="audi">Mac</option>
+				</select>
+			</div>	
+				<div class="details">
+				软件详细:
+				<textarea id="softmg1" name=""></textarea>
+			</div>
+			<div class="import">
+				软件摘要:
+				<textarea id="softmg2" name=""></textarea>
+			</div>
+			</li></ul>
+			<div class='jia'>
+				<input type="file" id="fileInput1" onchange='PreviewImage(this)'/>
+				<br>
+				<p>(上传一张或多张图片)</p>
+				<p style="top:42px;color:red">不能超过八张</p>
+   				 <div class="img-cont">
+    			</div>
+			</div>
+			<div class="rar">
+				<input type="file" name="" id="fileInput2"/>
+				<p>（选择上传的软件）</p>
+				<div class='lx'>
+					<select>
+						<option value="volvo">应用软件</option>
+						<option value="saab">系统工具</option>
+						<option value="opel">多媒体类</option>
+						<option value="audi">即时通讯</option>
+					</select>
+					<p style="top:5px">(选择软件类型)</p>
+				</div>
+			</div>
+			<input type="submit" name="" class="sub">
+		</form>
+	</div>
+</body>
+
+	
+	<script  src="js/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript">
+	//上传图片js判断	
+	var id='1';
+	function PreviewImage(imgFile){
+		var pattern=/(\.*.jpg$)|(\.*.png$)|(\.*.jpeg$)|(\.*.gif$)|(\.*.bmp$)/;
+		if(!pattern.test(imgFile.value)){
+			alert("系统只支持jpg/jpeg/png/gif/bmp格式的照片！");
+			imgFile.focus();
+		}
+		else{
+			var path;
+			id+=1;
+			$(".img-cont").append("<div><div id='"+id+"'><img src='' /></div><a class='hide delete-btn'>删除</a></div>");
+			if(document.all)
+			{
+				imgFile.select();
+				path=document.selection.createRange().text;
+				document.getElementById(id).innerHTML="";
+				document.getElementById(id).style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+path+"\")";//使用滤镜效果
+			}
+			else
+			{
+				path=URL.createObjectURL(imgFile.files[0]);
+				document.getElementById(id).innerHTML="<img src='"+path+"' width='100' height='90'>";
+			}
+		}
+		num+=1;
+	}
+	$(".img-cont").off("mouseenter",'div').on("mouseenter",'div',function(){
+		var that=this;
+		var dom=$(that).children('a');
+		dom.removeClass('hide');
+		dom.off('click');
+		dom.on('click',function(){
+			dom.parent().remove();
+		});	}).off('mouseleave','div').on("mouseleave",'div',function(){
+		var that=this;
+		$(that).children('a').addClass("hide");
+	})
+	//表单提交判断
+	function fs(){
+		var oName=document.getElementById('softname').value;
+		var oSoft1=document.getElementById('softmg1').value;
+		var oSoft2=document.getElementById('softmg2').value;
+		var oInput1=document.getElementById('fileInput1').value;
+		var oInput2=document.getElementById('fileInput2').value;
+
+		var ss=true;
+		
+		if(oName==""||oSoft1==""||oSoft2=="")
+		{
+			alert("请确认软件文本信息是否有空项！");
+			ss=false; 
+			return ss;
+		}
+		else if(oName.length>30)
+		{
+			alert('软件名长度在30个字符以内！');
+			ss=false;
+			return ss;
+		}
+		else if(oInput1=="")
+		{
+			alert("你还没有选择要上传的图片");
+			ss=false;
+			return ss;
+		}
+		else if(oInput2=="")
+		{
+			alert("你还没有选择要上传的软件");
+			ss=false;
+			return ss;
+		}
+			return ss;
+	}
+	</script>
+		
+</html>

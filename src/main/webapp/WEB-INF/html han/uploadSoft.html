@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>上传软件</title>
+	<link rel="stylesheet" href="css/index0.css">
+	<link href="images/logo3.png" rel="shortcut icon" />	
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+	</head>
+<body>
+
+<div class="wrappe wrappe-upload">
+	<div class="top">
+		<div class="top0">
+			
+			<a href="">退出</a>
+			<a href="login.html">登录</a>
+		</div>
+		<div class="top1">
+			<div class="logo">
+				<img src="images/logo.png">
+			</div>
+			<div class="search">
+					<form action="">
+						<div class="button">
+						<input type="text" class="text"placeholder="搜索"/>
+						</div>
+						<a href="searchSoftListsearchSoftList.html" class="find">搜索</a>
+					</form>
+			</div>
+		</div>
+		
+	</div>
+	<div class="header">
+	<ul id="header-li2">
+		<li class="header-li1" id="header-li2"><a href="" onclick="changeCss(this)">首页</a></li>
+		<li><a href="" onclick="changeCss(this)">装机必备</a></li>
+		<li><a href="">最新更新</a></li>
+		<li><a href="">下载排行</a></li>
+		<li><a href="">软件分类</a></li>
+		<li><a href="">发布软件</a></li>
+		<li><a href="">软件资讯</a></li>
+		<li><a href="">关于我们</a></li>
+		
+	</ul>
+	</div>
+	<div class="content content-upload">
+		<p>xx系统软件发布页面，请填写好您所上传软件详情。</p>
+		<p>添加注解，上传格式限制</p>
+		<form action="" method="post" name="con-upload" id="ocheck">
+		<table>
+			<tr><td>软件名：</td><td><input type="text"  class="softname"name="softname"></td></tr>
+		<tr><td>软件摘要：</td><td width="300px"><input type="text" class="softabstract" name="softabstract"></td></tr>
+		<tr><td>操作系统：</td><td><input type="text" class="softversion" name="softversion"></td></tr>
+		<tr><td>图片打包<a href="">?</a></td><td>
+			<div class="uploader white">
+				<input type="text" class="filename" />
+				<input type="button" name="file" class="button" value="浏览"/>
+				<input type="file" size="30" id="file" onchange="fileChange(this);"/>
+			</div>
+		</td></tr>
+		<tr><td>文件上传</td><td>
+			<div class="uploader white">
+				<input type="text" class="filename" />
+				<input type="button" name="file" class="button" value="浏览"/>
+				<input type="file" size="30"  id="file" onchange="fileChange(this);" />
+			</div>
+		</td></tr>
+		<tr><td>软件详细：</td><td><textarea class="softmg" name="softversion"></textarea></td></tr>
+		<tr><td colspan="2"><input type="submit" class="submit"name="submit" value="提&nbsp交"></td></tr>
+
+		</table>	
+		 </form>
+	</div>
+	<div class="connet">
+			<h2>友情链接</h2>
+			<ul>
+					<li><a href="http://soft.hao123.com/">hao123软件下载</a></li>
+					<li><a href="http://xiazai.sogou.com/">搜狗软件下载</a></li>
+					<li><a href="http://rj.baidu.com/">百度软件中心</a></li>
+					<li><a href="http://www.onlinedown.net/">华军软件园</a></li>
+					<li><a href="http://www.cr173.com/">西西软件园</a></li>
+					<li><a href="http://www.duote.com/">多特软件站</a></li>
+					<li><a href=""></a></li>
+				</ul>
+		</div>
+	<div class="footer foot-upload">
+		<ul>
+		<br>
+			<li><a href="">@2016</a></li>
+			<li><a href="">使用软件前必读</a></li>
+			<li><a href="">其他链接</a></li>
+		</ul>
+		
+	</div>
+</div>
+<a href="" class="returntop">返回顶部</a>
+</body>
+<script type="text/javascript" src="js/index.js"></script>
+</html>

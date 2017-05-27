@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.jiesunshine.software_system.dao.SoftwareMapper" >
+  <resultMap id="BaseResultMap" type="cn.jiesunshine.software_system.entity.Software" >
+    <id column="soft_id" property="softId" jdbcType="INTEGER" />
+    <result column="soft_user_id" property="softUserId" jdbcType="INTEGER" />
+    <result column="soft_group_id" property="softGroupId" jdbcType="INTEGER" />
+    <result column="soft_name" property="softName" jdbcType="VARCHAR" />
+    <result column="soft_abstract" property="softAbstract" jdbcType="VARCHAR" />
+    <result column="soft_size" property="softSize" jdbcType="BIGINT" />
+    <result column="soft_version" property="softVersion" jdbcType="VARCHAR" />
+    <result column="soft_date" property="softDate" jdbcType="DATE" />
+    <result column="soft_os" property="softOs" jdbcType="VARCHAR" />
+    <result column="soft_download_volume" property="softDownloadVolume" jdbcType="INTEGER" />
+    <result column="soft_file_link" property="softFileLink" jdbcType="VARCHAR" />
+    <result column="soft_icon_link" property="softIconLink" jdbcType="VARCHAR" />
+    <result column="soft_create_time" property="softCreateTime" jdbcType="TIMESTAMP" />
+    <result column="soft_create_ip" property="softCreateIp" jdbcType="VARCHAR" />
+    <result column="pre_update_time" property="preUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="pre_update_ip" property="preUpdateIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.jiesunshine.software_system.entity.Software" extends="BaseResultMap" >
+    <result column="soft_details" property="softDetails" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    soft_id, soft_user_id, soft_group_id, soft_name, soft_abstract, soft_size, soft_version, 
+    soft_date, soft_os, soft_download_volume, soft_file_link, soft_icon_link, soft_create_time, 
+    soft_create_ip, pre_update_time, pre_update_ip
+  </sql>
+  <sql id="Blob_Column_List" >
+    soft_details
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.jiesunshine.software_system.entity.SoftwareExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from software
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.jiesunshine.software_system.entity.SoftwareExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from software
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from software
+    where soft_id = #{softId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from software
+    where soft_id = #{softId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.jiesunshine.software_system.entity.SoftwareExample" >
+    delete from software
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.jiesunshine.software_system.entity.Software" >
+    insert into software (soft_id, soft_user_id, soft_group_id, 
+      soft_name, soft_abstract, soft_size, 
+      soft_version, soft_date, soft_os, 
+      soft_download_volume, soft_file_link, soft_icon_link, 
+      soft_create_time, soft_create_ip, pre_update_time, 
+      pre_update_ip, soft_details)
+    values (#{softId,jdbcType=INTEGER}, #{softUserId,jdbcType=INTEGER}, #{softGroupId,jdbcType=INTEGER}, 
+      #{softName,jdbcType=VARCHAR}, #{softAbstract,jdbcType=VARCHAR}, #{softSize,jdbcType=BIGINT}, 
+      #{softVersion,jdbcType=VARCHAR}, #{softDate,jdbcType=DATE}, #{softOs,jdbcType=VARCHAR}, 
+      #{softDownloadVolume,jdbcType=INTEGER}, #{softFileLink,jdbcType=VARCHAR}, #{softIconLink,jdbcType=VARCHAR}, 
+      #{softCreateTime,jdbcType=TIMESTAMP}, #{softCreateIp,jdbcType=VARCHAR}, #{preUpdateTime,jdbcType=TIMESTAMP}, 
+      #{preUpdateIp,jdbcType=VARCHAR}, #{softDetails,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.jiesunshine.software_system.entity.Software" >
+    insert into software
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="softId != null" >
+        soft_id,
+      </if>
+      <if test="softUserId != null" >
+        soft_user_id,
+      </if>
+      <if test="softGroupId != null" >
+        soft_group_id,
+      </if>
+      <if test="softName != null" >
+        soft_name,
+      </if>
+      <if test="softAbstract != null" >
+        soft_abstract,
+      </if>
+      <if test="softSize != null" >
+        soft_size,
+      </if>
+      <if test="softVersion != null" >
+        soft_version,
+      </if>
+      <if test="softDate != null" >
+        soft_date,
+      </if>
+      <if test="softOs != null" >
+        soft_os,
+      </if>
+      <if test="softDownloadVolume != null" >
+        soft_download_volume,
+      </if>
+      <if test="softFileLink != null" >
+        soft_file_link,
+      </if>
+      <if test="softIconLink != null" >
+        soft_icon_link,
+      </if>
+      <if test="softCreateTime != null" >
+        soft_create_time,
+      </if>
+      <if test="softCreateIp != null" >
+        soft_create_ip,
+      </if>
+      <if test="preUpdateTime != null" >
+        pre_update_time,
+      </if>
+      <if test="preUpdateIp != null" >
+        pre_update_ip,
+      </if>
+      <if test="softDetails != null" >
+        soft_details,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="softId != null" >
+        #{softId,jdbcType=INTEGER},
+      </if>
+      <if test="softUserId != null" >
+        #{softUserId,jdbcType=INTEGER},
+      </if>
+      <if test="softGroupId != null" >
+        #{softGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="softName != null" >
+        #{softName,jdbcType=VARCHAR},
+      </if>
+      <if test="softAbstract != null" >
+        #{softAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="softSize != null" >
+        #{softSize,jdbcType=BIGINT},
+      </if>
+      <if test="softVersion != null" >
+        #{softVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="softDate != null" >
+        #{softDate,jdbcType=DATE},
+      </if>
+      <if test="softOs != null" >
+        #{softOs,jdbcType=VARCHAR},
+      </if>
+      <if test="softDownloadVolume != null" >
+        #{softDownloadVolume,jdbcType=INTEGER},
+      </if>
+      <if test="softFileLink != null" >
+        #{softFileLink,jdbcType=VARCHAR},
+      </if>
+      <if test="softIconLink != null" >
+        #{softIconLink,jdbcType=VARCHAR},
+      </if>
+      <if test="softCreateTime != null" >
+        #{softCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="softCreateIp != null" >
+        #{softCreateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="preUpdateTime != null" >
+        #{preUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="preUpdateIp != null" >
+        #{preUpdateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="softDetails != null" >
+        #{softDetails,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.jiesunshine.software_system.entity.SoftwareExample" resultType="java.lang.Integer" >
+    select count(*) from software
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update software
+    <set >
+      <if test="record.softId != null" >
+        soft_id = #{record.softId,jdbcType=INTEGER},
+      </if>
+      <if test="record.softUserId != null" >
+        soft_user_id = #{record.softUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.softGroupId != null" >
+        soft_group_id = #{record.softGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.softName != null" >
+        soft_name = #{record.softName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softAbstract != null" >
+        soft_abstract = #{record.softAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softSize != null" >
+        soft_size = #{record.softSize,jdbcType=BIGINT},
+      </if>
+      <if test="record.softVersion != null" >
+        soft_version = #{record.softVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softDate != null" >
+        soft_date = #{record.softDate,jdbcType=DATE},
+      </if>
+      <if test="record.softOs != null" >
+        soft_os = #{record.softOs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softDownloadVolume != null" >
+        soft_download_volume = #{record.softDownloadVolume,jdbcType=INTEGER},
+      </if>
+      <if test="record.softFileLink != null" >
+        soft_file_link = #{record.softFileLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softIconLink != null" >
+        soft_icon_link = #{record.softIconLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softCreateTime != null" >
+        soft_create_time = #{record.softCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.softCreateIp != null" >
+        soft_create_ip = #{record.softCreateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preUpdateTime != null" >
+        pre_update_time = #{record.preUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.preUpdateIp != null" >
+        pre_update_ip = #{record.preUpdateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softDetails != null" >
+        soft_details = #{record.softDetails,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update software
+    set soft_id = #{record.softId,jdbcType=INTEGER},
+      soft_user_id = #{record.softUserId,jdbcType=INTEGER},
+      soft_group_id = #{record.softGroupId,jdbcType=INTEGER},
+      soft_name = #{record.softName,jdbcType=VARCHAR},
+      soft_abstract = #{record.softAbstract,jdbcType=VARCHAR},
+      soft_size = #{record.softSize,jdbcType=BIGINT},
+      soft_version = #{record.softVersion,jdbcType=VARCHAR},
+      soft_date = #{record.softDate,jdbcType=DATE},
+      soft_os = #{record.softOs,jdbcType=VARCHAR},
+      soft_download_volume = #{record.softDownloadVolume,jdbcType=INTEGER},
+      soft_file_link = #{record.softFileLink,jdbcType=VARCHAR},
+      soft_icon_link = #{record.softIconLink,jdbcType=VARCHAR},
+      soft_create_time = #{record.softCreateTime,jdbcType=TIMESTAMP},
+      soft_create_ip = #{record.softCreateIp,jdbcType=VARCHAR},
+      pre_update_time = #{record.preUpdateTime,jdbcType=TIMESTAMP},
+      pre_update_ip = #{record.preUpdateIp,jdbcType=VARCHAR},
+      soft_details = #{record.softDetails,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update software
+    set soft_id = #{record.softId,jdbcType=INTEGER},
+      soft_user_id = #{record.softUserId,jdbcType=INTEGER},
+      soft_group_id = #{record.softGroupId,jdbcType=INTEGER},
+      soft_name = #{record.softName,jdbcType=VARCHAR},
+      soft_abstract = #{record.softAbstract,jdbcType=VARCHAR},
+      soft_size = #{record.softSize,jdbcType=BIGINT},
+      soft_version = #{record.softVersion,jdbcType=VARCHAR},
+      soft_date = #{record.softDate,jdbcType=DATE},
+      soft_os = #{record.softOs,jdbcType=VARCHAR},
+      soft_download_volume = #{record.softDownloadVolume,jdbcType=INTEGER},
+      soft_file_link = #{record.softFileLink,jdbcType=VARCHAR},
+      soft_icon_link = #{record.softIconLink,jdbcType=VARCHAR},
+      soft_create_time = #{record.softCreateTime,jdbcType=TIMESTAMP},
+      soft_create_ip = #{record.softCreateIp,jdbcType=VARCHAR},
+      pre_update_time = #{record.preUpdateTime,jdbcType=TIMESTAMP},
+      pre_update_ip = #{record.preUpdateIp,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.jiesunshine.software_system.entity.Software" >
+    update software
+    <set >
+      <if test="softUserId != null" >
+        soft_user_id = #{softUserId,jdbcType=INTEGER},
+      </if>
+      <if test="softGroupId != null" >
+        soft_group_id = #{softGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="softName != null" >
+        soft_name = #{softName,jdbcType=VARCHAR},
+      </if>
+      <if test="softAbstract != null" >
+        soft_abstract = #{softAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="softSize != null" >
+        soft_size = #{softSize,jdbcType=BIGINT},
+      </if>
+      <if test="softVersion != null" >
+        soft_version = #{softVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="softDate != null" >
+        soft_date = #{softDate,jdbcType=DATE},
+      </if>
+      <if test="softOs != null" >
+        soft_os = #{softOs,jdbcType=VARCHAR},
+      </if>
+      <if test="softDownloadVolume != null" >
+        soft_download_volume = #{softDownloadVolume,jdbcType=INTEGER},
+      </if>
+      <if test="softFileLink != null" >
+        soft_file_link = #{softFileLink,jdbcType=VARCHAR},
+      </if>
+      <if test="softIconLink != null" >
+        soft_icon_link = #{softIconLink,jdbcType=VARCHAR},
+      </if>
+      <if test="softCreateTime != null" >
+        soft_create_time = #{softCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="softCreateIp != null" >
+        soft_create_ip = #{softCreateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="preUpdateTime != null" >
+        pre_update_time = #{preUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="preUpdateIp != null" >
+        pre_update_ip = #{preUpdateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="softDetails != null" >
+        soft_details = #{softDetails,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where soft_id = #{softId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.jiesunshine.software_system.entity.Software" >
+    update software
+    set soft_user_id = #{softUserId,jdbcType=INTEGER},
+      soft_group_id = #{softGroupId,jdbcType=INTEGER},
+      soft_name = #{softName,jdbcType=VARCHAR},
+      soft_abstract = #{softAbstract,jdbcType=VARCHAR},
+      soft_size = #{softSize,jdbcType=BIGINT},
+      soft_version = #{softVersion,jdbcType=VARCHAR},
+      soft_date = #{softDate,jdbcType=DATE},
+      soft_os = #{softOs,jdbcType=VARCHAR},
+      soft_download_volume = #{softDownloadVolume,jdbcType=INTEGER},
+      soft_file_link = #{softFileLink,jdbcType=VARCHAR},
+      soft_icon_link = #{softIconLink,jdbcType=VARCHAR},
+      soft_create_time = #{softCreateTime,jdbcType=TIMESTAMP},
+      soft_create_ip = #{softCreateIp,jdbcType=VARCHAR},
+      pre_update_time = #{preUpdateTime,jdbcType=TIMESTAMP},
+      pre_update_ip = #{preUpdateIp,jdbcType=VARCHAR},
+      soft_details = #{softDetails,jdbcType=LONGVARCHAR}
+    where soft_id = #{softId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.jiesunshine.software_system.entity.Software" >
+    update software
+    set soft_user_id = #{softUserId,jdbcType=INTEGER},
+      soft_group_id = #{softGroupId,jdbcType=INTEGER},
+      soft_name = #{softName,jdbcType=VARCHAR},
+      soft_abstract = #{softAbstract,jdbcType=VARCHAR},
+      soft_size = #{softSize,jdbcType=BIGINT},
+      soft_version = #{softVersion,jdbcType=VARCHAR},
+      soft_date = #{softDate,jdbcType=DATE},
+      soft_os = #{softOs,jdbcType=VARCHAR},
+      soft_download_volume = #{softDownloadVolume,jdbcType=INTEGER},
+      soft_file_link = #{softFileLink,jdbcType=VARCHAR},
+      soft_icon_link = #{softIconLink,jdbcType=VARCHAR},
+      soft_create_time = #{softCreateTime,jdbcType=TIMESTAMP},
+      soft_create_ip = #{softCreateIp,jdbcType=VARCHAR},
+      pre_update_time = #{preUpdateTime,jdbcType=TIMESTAMP},
+      pre_update_ip = #{preUpdateIp,jdbcType=VARCHAR}
+    where soft_id = #{softId,jdbcType=INTEGER}
+  </update>
+</mapper>

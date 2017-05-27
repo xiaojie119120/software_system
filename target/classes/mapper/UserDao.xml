@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jiesunshine.software_system.dao.UserDao">
+<insert id="addUser" parameterType="cn.jiesunshine.software_system.entity.User">
+	INSERT IGNORE INTO `user` (name,password,email,type,reg_ip,pre_login_ip,pre_update_ip) VALUES (#{name},#{password},#{email},#{type},#{regIp},#{preLoginIp},#{preUpdateIp});
+</insert>
+<delete id="delUserById" parameterType="int">
+	DELETE FROM `user` WHERE id = #{id};
+</delete>
+<update id="updateUserInfo">
+	UPDATE `user` SET name = #{name}, email = #{email}, pic_link = #{picLink}, pre_update_time = CURRENT_TIMESTAMP, pre_update_ip = #{preUpdateIp} WHERE id = #{id};
+</update>
+<update id="updateUserAllInfo">
+	UPDATE `user` SET name = #{name}, email = #{email}, password = #{password}, type = #{type}, pic_link = #{picLink}, pre_update_time = CURRENT_TIMESTAMP, pre_update_ip = #{preUpdateIp} WHERE id = #{id};
+</update>
+<update id="reduceSoftwareCount">
+	UPDATE `user` SET software_count = software_count - 1, pre_update_time = CURRENT_TIMESTAMP, pre_update_ip = #{ip} WHERE	id = #{id} AND software_count > 0;
+</update>
+<update id="addSoftwareCount">
+	UPDATE `user` SET software_count = software_count + 1, pre_update_time = CURRENT_TIMESTAMP, pre_update_ip = #{ip} WHERE	id = #{id};
+</update>
+<update id="updateUserPwd">
+	UPDATE `user` SET password = #{pwd}, pre_update_time = CURRENT_TIMESTAMP, pre_update_ip = #{ip} WHERE id = #{id};
+</update>
+<update id="updateUserType">
+	UPDATE `user` SET type = #{type}, pre_update_time = CURRENT_TIMESTAMP, pre_update_ip = #{ip} WHERE id = #{id};
+</update>
+<update id="updateUserLoginIp">
+	UPDATE `user` SET pre_Login_time = CURRENT_TIMESTAMP, pre_Login_ip = #{ip} WHERE id = #{id};
+</update>
+<select id="queryUserById" parameterType="int" resultType="cn.jiesunshine.software_system.entity.User">
+	SELECT * FROM `user` WHERE id = #{id};
+</select>
+<select id="queryAllUsersInfo" resultType="User">
+	SELECT `id`,`name`,`email`,`software_count`,`type`,`pre_login_time`,`pre_login_ip` FROM `user` ORDER BY id LIMIT #{offset}, #{limit};
+</select>
+<select id="queryAllUsers" resultType="User">
+	SELECT * FROM `user` ORDER BY id LIMIT #{offset}, #{limit};
+</select>
+<select id="queryUserByName" resultType="User">
+	SELECT * FROM `user` WHERE name = #{name};
+</select>
+<select id="queryUserExistByName" resultType="int">
+	SELECT COUNT(*) FROM `user` WHERE name = #{name};
+</select>
+<select id="queryUserExistByEmail" resultType="int">
+	SELECT COUNT(*) FROM `user` WHERE email = #{email};
+</select>
+<select id="queryUserCount" resultType="int">
+	SELECT COUNT(*) FROM `user`;
+</select>
+</mapper>

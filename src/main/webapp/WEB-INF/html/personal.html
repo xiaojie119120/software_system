@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>个人信息</title>
+	<link rel="stylesheet" type="text/css" href="css/index0.css">
+	<link rel="shortcut icon" href="images/logo3.png">
+</head>
+<body>
+	<div class="personal">
+		<div class="person_top">
+			<div class="con_top">
+				<a href=""><img src="images/logo.png"></a>
+			</div>
+		</div>
+		<div class="person_cen">
+			<div class="cen_left">
+				<div class="top_png">
+					<div class="png_head">
+						<img src="images/head.jpg">
+					</div>
+					<p>Deep春暖花开</p>
+				</div>
+				<ul class="left_data">
+					<li class="ys_one" style="background:#f5f7fa">
+						<img src="images/p_icon1.png" class="p_icon" align="center">
+						<span>个人资料</span>	
+					</li>
+					<li class="ys_two">
+						<img src="images/p_icon2.png" class="p_icon" align="center">
+						<span>修改账户</span>		
+					</li>
+				</ul>
+			</div>
+			<div class="cen_right0">
+			<form class="cen_right00" action="" method="post">
+				<dl>
+					<dt>昵称</dt>
+					<input type="text" name="" >
+					<dt>微博</dt>
+					<input type="text" name="">
+					<dt>博客</dt>
+					<input type="text" name="">
+					<dt class="jies">自我介绍</dt>
+					<textarea></textarea>
+					<input type="submit" name="" value="更新" class="submit">
+					<dt class="zhan">
+						更多内容
+						<span id="deploy">展开</span>
+						<hr style="width:590px;margin-left:100px;color:#dce3e8">
+					</dt>
+					<div class="z_contain">
+						<div class="na_name1" style="width:306px;float:left">
+							<p>真实姓名</p>
+							<input type="text" name="" class="zenj">
+						</div>
+						<div class="na_name2" style="width:306px;float:left;margin-left:76px">
+							<p>手机号码</p>
+							<input type="text" name="" class="zenj">
+						</div>
+						<div class="na_name3" style="width:306px;float:left;">
+							<p>省份</p>
+							<input type="text" name="" class="zenj">
+						</div>
+						<div class="na_name4" style="width:306px;float:left;margin-left:76px">
+							<p>城市</p>
+							<input type="text" name="" class="zenj">
+						</div>
+						<div class="na_name4" style="float:left;">
+							<p>备注</p>
+							<textarea></textarea>
+						</div>
+						<input type="submit" name="" class="submit_2" value="更新">
+					</div>	
+				</dl>
+			</form>
+			<form class="cen_right01" action="" method="post" onsubmit="return pass()">
+				<dl>
+					<dt class="p_bold">修改密码<hr></dt>
+					<dt>当前密码</dt>
+					<input type="password" name="" id="pass_one">
+					<dt>新密码</dt>
+					<input type="password" name="" id="pass_two">
+					<dt>确认密码</dt>
+					<input type="password" name="" id="pass_three">
+					<br>
+					<input type="submit" name="" value="修改密码" class="submit_3">
+				</dl>
+
+			</form>
+			</div>
+				
+		</div>
+	</div>
+</body>
+<script  src="js/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+	$("#deploy").click(function(){
+		//if($(this).)
+		if($(this).html()=="展开")
+		{
+			$(this).html("收起");
+			$(".z_contain").show();
+		}
+		else if($(this).html()=="收起")
+		{
+			$(this).html("展开");
+			$(".z_contain").hide();
+		}
+	});
+	$(".person_cen .cen_left .left_data li").click(function(){
+		$(this).css("background","#f5f7fa").siblings().css("background","#fff");
+	})
+	$(".ys_one").click(function(){
+		$(".cen_right00").show();
+		$(".cen_right01").hide();
+	})
+	$(".ys_two").click(function(){
+		$(".cen_right01").show();
+		$(".cen_right00").hide();
+	})
+	//if($("pass_one").value()==$("pass_two").value())
+	//{
+	//	alert("新密码不能与当前密码相同");
+	//}
+	function pass(){
+		var oPass1=document.getElementById("pass_one").value;
+		var oPass2=document.getElementById("pass_two").value;
+		var oPass3=document.getElementById("pass_three").value;
+		if(oPass1==""||oPass2==""||oPass3=="")
+		{
+			alert("请确认是否有空项");
+		}
+		if(oPass1==oPass2)
+		{
+			alert("新密码不能与当前密码相同");
+		}
+		if(oPass2!=oPass3)
+		{
+			alert("密码和确认密码不同，请重新输入！");
+		}
+		return false;
+	}
+</script>
+</html>

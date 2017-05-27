@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jiesunshine.software_system.dao.SoftwareDao">
+<select id="querySoftwareById" resultType="cn.jiesunshine.software_system.entity.SoftwareExtend" parameterType="int">
+	SELECT `software`.*,`name` AS `user_name`,`group_name` FROM `software`,`user`,`soft_group` WHERE soft_id = #{id} AND `software`.soft_user_id = `user`.id AND `software`.soft_group_id = `soft_group`.group_id;
+</select>
+</mapper>
